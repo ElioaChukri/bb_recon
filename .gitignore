@@ -1,0 +1,14 @@
+**/aquatone
+*.tar.gz
+venv
+amass/*.html
+amass/*.log
+amass/*.txt
+amass/*.sqlite
+amass/wordlists
+skip
+targets
+*.log
+wordlist*.txt
+*sqlite3
+
