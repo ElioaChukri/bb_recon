@@ -1,0 +1,8 @@
+options:
+  datasources: "./datasources.yaml" # the file path that will point to the data source configuration
+  database: "postgres://postgres:password@localhost:5432/assetdb" # databases URI to be used when adding entries
+  wordlist: "./wordlist_big.txt" # the file path that will point to the wordlist used for enumeration
+  bruteforce:
+    enabled: true
+    wordlists:
+      - "./wordlist_small.txt"

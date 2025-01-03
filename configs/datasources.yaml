@@ -1,0 +1,238 @@
+datasources:
+  - name: 360PassiveDNS
+    ttl: 3600
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: ASNLookup
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: Ahrefs
+    ttl: 4320
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: AlienVault
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: BeVigil
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: BigDataCloud
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: BinaryEdge
+    ttl: 10080
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: BufferOver
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: BuiltWith
+    ttl: 10080
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: C99
+    ttl: 4320
+    creds:
+      account1: 
+        apikey: <api-key>
+      account2: 
+        apikey: <api-key>
+  - name: Censys
+    ttl: 10080
+    creds:
+      account: 
+        apikey: <api-key>
+        secret: <secret>
+  - name: Chaos
+    ttl: 4320
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: CIRCL
+    creds:
+      account: 
+        username: null
+        password: null
+  - name: CertCentral
+    creds:
+      account: 
+        username: null
+        apikey: <api-key>
+  - name: DNSDB
+    ttl: 4320
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: DNSlytics
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: DNSRepo
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: Deepinfo
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: Detectify
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: FacebookCT
+    ttl: 4320
+    creds:
+      app1: 
+        apikey: <api-key>
+        secret: null
+      app2: 
+        apikey: <api-key>
+        secret: null
+  - name: FOFA
+    ttl: 10080
+    creds:
+      account: 
+        username: null
+        apikey: <api-key>
+  - name: FullHunt
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: GitHub
+    ttl: 4320
+    creds:
+      accountname: 
+        apikey: <api-key>
+  - name: GitLab
+    ttl: 4320
+    creds:
+      accountname: 
+        apikey: <api-key>
+  - name: HackerTarget
+    ttl: 1440
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: Hunter
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: IntelX
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: IPdata
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: IPinfo
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: LeakIX
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: Netlas
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: ONYPHE
+    ttl: 4320
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: Pastebin
+    ttl: 10080
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: PassiveTotal
+    ttl: 10080
+    creds:
+      account: 
+        username: null
+        apikey: <api-key>
+  - name: PentestTools
+    ttl: 10080
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: PublicWWW
+    ttl: 10080
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: Quake
+    ttl: 4320
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: SOCRadar
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: SecurityTrails
+    ttl: 1440
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: Shodan
+    ttl: 10080
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: Spamhaus
+    ttl: 1440
+    creds:
+      account: 
+        username: null
+        password: null
+  - name: ThreatBook
+    creds:
+      account1: 
+        apikey: <api-key>
+  - name: URLScan
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: VirusTotal
+    ttl: 10080
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: WhoisXMLAPI
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: Yandex
+    ttl: 1440
+    creds:
+      account: 
+        username: null
+        apikey: <api-key>
+  - name: ZETAlytics
+    ttl: 1440
+    creds:
+      account: 
+        apikey: <api-key>
+  - name: ZoomEye
+    ttl: 1440
+    creds:
+      account: 
+        username: null
+        password: null                     
+
+# this is the global options that will be considered. For example, minimum_ttl would be a global option used to compare
+# the minimum_ttl to the other datasources ttl.
+global_options: 
+  minimum_ttl: 1440
