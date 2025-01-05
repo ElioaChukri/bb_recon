@@ -1,4 +1,4 @@
-#!/bin/bas$h
+#!/bin/bash
 
 # To handle discrepancies in httpx naming
 # shellcheck disable=SC2140
@@ -14,6 +14,7 @@ SHODAN_API_KEY="<SHODAN-API-KEY>"
 SUBS=true
 ROOT=""
 XNLINK_WAYMORE=true
+NEW_SUBDOMAINS=false
 
 #TODO: Add log_and_run function that will log all commands ran in a file
 
@@ -168,6 +169,7 @@ else
 
       current_date=$(date "+%Y-%m-%d")
       message="New subdomain(s) found for $DOMAIN on $current_date:%0a%0a"
+      NEW_SUBDOMAINS=true
 
       while IFS= read -r line; do
         message+="$line%0a%0a"
@@ -175,10 +177,6 @@ else
 
       notify "$message"
       rm "$domainpath"/alive_diff.txt
-
-    else 
-      log "[*] No new subdomains found"
-    fi 
 
     rm "$domainpath"/alive_tmp.txt
 
@@ -197,6 +195,11 @@ if [ "$lines" -eq 1 ]; then
   domainpath="$ROOT/_$DOMAIN"
 fi
 
+if [ "$NEW_SUBDOMAINS" = false ]; then
+  log "[*] No new subdomains found. Skipping further recon"
+  exit 0
+fi
+
 # Use gowitness to take screenshots of found subdomains
 log "[*] Running gowitness on the subdomains..."
 gowitness scan file -f "$domainpath/alive.txt" \
@@ -210,7 +213,7 @@ mkdir "$domainpath/katana/" "$domainpath/katana/responses/"
 katana -u "$domainpath/httpx.txt" -depth 5 -js-crawl -known-files all -retry 2 \
         -strategy breadth-first -xhr -ef css,jpg,jpeg,png,woff,svg,woff2,gif \
         -field-scope rdn -field qurl -no-color -jsonl \
-        -form-extraction -ignore-query-params \
+        -form-extraction -ignore-query-params -omit-body \
         -store-response -store-response-dir "$domainpath/katana/responses/" \
         -output "$domainpath/katana/katana.jsonl" || log "[!] Katana failed"
 log "[*] Katana scan complete"
@@ -220,18 +223,20 @@ source "$HOME/.venv/bin/activate"
 
 # Run waymore on wildcards.txt
 
+# wayback machine is down, can't use waymore
 # Check if wildcards.txt is empty before running waymore on it
-if [ -s "$ROOT/wildcards.txt" ]; then
-  log "[*] Running waymore on the wildcards..."
-  mkdir "$ROOT/waymore/" "$ROOT/waymore/responses/"
-  waymore --input "$ROOT/wildcards.txt" -mode R --output-urls "$ROOT/waymore/urls.txt" \
-          --output-responses "$ROOT/waymore/responses/" --timeout 20 --limit-requests 5000 \
-          --config "./configs/waymore_config.yml" --limit 3000
-  log "[*] Waymore scan complete"
-else
-  log "[*] No wildcard domains found. Skipping waymore scan"
-  XNLINK_WAYMORE=false
-fi
+#if [ -s "$ROOT/wildcards.txt" ]; then
+#  log "[*] Running waymore on the wildcards..."
+#  mkdir "$ROOT/waymore/" "$ROOT/waymore/responses/"
+#  waymore --input "$ROOT/wildcards.txt" -mode R --output-urls "$ROOT/waymore/urls.txt" \
+#          --output-responses "$ROOT/waymore/responses/" --timeout 20 --limit-requests 5000 \
+#          --config "./configs/waymore_config.yml" --limit 3000
+#  log "[*] Waymore scan complete"
+#else
+#  log "[*] No wildcard domains found. Skipping waymore scan"
+#  XNLINK_WAYMORE=false
+#fi
+XNLINK_WAYMORE=false
 
 # Combine all domains and wildcards into a temp file to use in xnLinkFinder scoping
 cat "$ROOT/wildcards.txt" "$ROOT/domains.txt" | sort -u > "$ROOT/tmp.txt"
