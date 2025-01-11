@@ -182,6 +182,7 @@ else
 
   else 
     log "[*] Previous alive.txt file not found. First run?"
+    NEW_SUBDOMAINS=true
   fi 
 fi
 
